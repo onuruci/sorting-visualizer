@@ -2,7 +2,7 @@ import sleep from "./sleep";
 
 // set types
 
-const bubbleSort = async (bars: number[], setBars: any, setSelected: any) => {
+const bubbleSort = async (bars: number[], setBars: any, setSelected: any, pace: number) => {
   let array = bars;
   let sorted = false;
   let lenToLoop = array.length;
@@ -23,7 +23,7 @@ const bubbleSort = async (bars: number[], setBars: any, setSelected: any) => {
         setSelected(i);
       }
       setBars([...array]);
-      await sleep(50);
+      await sleep(pace);
     }
     lenToLoop -= 1;
     console.log(lenToLoop);
@@ -32,7 +32,7 @@ const bubbleSort = async (bars: number[], setBars: any, setSelected: any) => {
   console.log(bars);
 
   setBars([...array]);
-  setSelected(-1);
+  setSelected(0);
 };
 
 export default bubbleSort;
