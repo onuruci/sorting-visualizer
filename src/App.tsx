@@ -25,31 +25,32 @@ function App() {
   const handleBubbleSort = async () => {
     let array = bars;
     let sorted = false;
+    let lenToLoop = array.length;
 
     while (!sorted) {
       let maxNum = array[0];
-      let selected = 0;
       sorted = true;
 
-      for (let i = 1; i < array.length; i++) {
+      for (let i = 1; i < lenToLoop; i++) {
         if (array[i] >= maxNum) {
-          selected = i;
           maxNum = array[i];
           setSelected(i);
         } else {
           let temp = array[i];
-          array[i] = array[selected];
-          array[selected] = temp;
+          array[i] = array[i - 1];
+          array[i - 1] = temp;
           sorted = false;
-          selected = i;
           setSelected(i);
         }
         setBars([...array]);
-        await sleep(30);
+        await sleep(50);
       }
+      lenToLoop -= 1;
+      console.log(lenToLoop);
     }
 
     setBars([...array]);
+    setSelected(-1);
   };
 
   useEffect(() => {
