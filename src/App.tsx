@@ -17,10 +17,15 @@ function App() {
     setPace(100 - e.target.value);
   };
 
+  const handleDataSetSizeChange = (e: any) => {
+    setBarCount(e.target.value);
+  };
+
   useEffect(() => {
     let arr = [];
+    let change = 400 / barCount;
     for (let i = 1; i <= barCount; i++) {
-      arr.push(20 * i);
+      arr.push(change * i);
     }
     setBars([...arr]);
     console.log(arr);
@@ -38,7 +43,12 @@ function App() {
           </h2>
         </div>
       </div>
-      <div className='max-w-fit p-3 mx-auto text-left flex space-x-8 items-center'>
+      <div className='max-w-fit p-3 mx-auto text-left flex space-x-8 items-center'><Box width={300}>
+        <Typography gutterBottom>
+          Dataset Size
+        </Typography>
+        <Slider defaultValue={20} valueLabelDisplay="auto" min={10} max={40} marks step={10} onChange={(e) => handleDataSetSizeChange(e)} />
+      </Box>
         <Box width={300}>
           <Typography gutterBottom>
             Pace
@@ -52,7 +62,7 @@ function App() {
         {
           bars.map((e: number, i) => {
             return (
-              <div key={e} className={"w-5 p-3 mx-1 mt-auto " + (i !== selectedNum ? "bg-red-700" : "bg-green-700")} style={{ "height": (e).toString() + "px" }} />
+              <div key={e} className={"w-5 p-2 mx-1 mt-auto " + (i !== selectedNum ? "bg-red-700" : "bg-green-700")} style={{ "height": (e).toString() + "px" }} />
             );
           })
         }
