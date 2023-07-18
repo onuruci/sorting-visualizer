@@ -2,12 +2,20 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';
 import { handleShuffle, bubbleSort } from './algorithms';
+import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import { Typography } from '@mui/material';
+import Button from '@mui/material/Button';
 
 function App() {
   const [barCount, setBarCount] = useState(20);
   const [bars, setBars] = useState([1]);
   const [selectedNum, setSelected] = useState(0);
+  const [pace, setPace] = useState(50);
+
+  const handlePaceChange = (e: any) => {
+    setPace(100 - e.target.value);
+  };
 
   useEffect(() => {
     let arr = [];
@@ -30,9 +38,16 @@ function App() {
           </h2>
         </div>
       </div>
-      <button onClick={() => handleShuffle(bars, setBars)}> Shuffle</button>
-      <button onClick={() => bubbleSort(bars, setBars, setSelected)}> Sort</button>
-      {bars[0]}
+      <div className='max-w-fit p-3 mx-auto text-left flex space-x-8 items-center'>
+        <Box width={300}>
+          <Typography gutterBottom>
+            Pace
+          </Typography>
+          <Slider defaultValue={50} valueLabelDisplay="auto" min={10} max={90} onChange={(e) => handlePaceChange(e)} />
+        </Box>
+        <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => handleShuffle(bars, setBars, pace)} >Shuffle</Button>
+        <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => bubbleSort(bars, setBars, setSelected, pace)}>Sort</Button>
+      </div>
       <div className='flex items-center mx-auto max-w-fit mt-20'>
         {
           bars.map((e: number, i) => {
