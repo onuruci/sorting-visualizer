@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';
-import { handleShuffle, bubbleSort } from './algorithms';
+import { handleShuffle, bubbleSort, mergeSort } from './algorithms';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Typography } from '@mui/material';
@@ -56,7 +56,7 @@ function App() {
           <Slider defaultValue={50} valueLabelDisplay="auto" min={10} max={90} onChange={(e) => handlePaceChange(e)} />
         </Box>
         <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => handleShuffle(bars, setBars, pace)} >Shuffle</Button>
-        <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => bubbleSort(bars, setBars, setSelected, pace)}>Sort</Button>
+        <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => mergeSort(bars, setBars, setSelected, pace)}>Sort</Button>
       </div>
       <div className='flex items-center mx-auto max-w-fit mt-20'>
         {
