@@ -58,7 +58,7 @@ function App() {
         <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => handleShuffle(bars, setBars, pace)} >Shuffle</Button>
         <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => mergeSort(bars, setBars, setSelected, pace)}>Sort</Button>
       </div>
-      <div className='flex items-center mx-auto max-w-fit mt-20'>
+      <div className='flex items-center mx-auto max-w-fit mt-20 min-h-[500px]'>
         {
           bars.map((e: number, i) => {
             return (
