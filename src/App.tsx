@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 function App() {
   const [barCount, setBarCount] = useState(20);
   const [bars, setBars] = useState([1]);
-  const [selectedNum, setSelected] = useState(0);
+  const [selectedNum, setSelected] = useState<SelectedItem[]>([]);
   const [pace, setPace] = useState(50);
 
   const handlePaceChange = (e: any) => {
@@ -19,6 +19,17 @@ function App() {
 
   const handleDataSetSizeChange = (e: any) => {
     setBarCount(e.target.value);
+  };
+
+  const getColor = (indexNum: number) => {
+
+    for (let i = 0; i < selectedNum.length; i++) {
+      if (indexNum === selectedNum[i].index) {
+        return selectedNum[i].color;
+      }
+    }
+
+    return "bg-red-700";
   };
 
   useEffect(() => {
@@ -62,7 +73,7 @@ function App() {
         {
           bars.map((e: number, i) => {
             return (
-              <div key={e} className={"w-5 p-2 mx-1 mt-auto " + (i !== selectedNum ? "bg-red-700" : "bg-green-700")} style={{ "height": (e).toString() + "px" }} />
+              <div key={e} className={"w-5 p-2 mx-1 mt-auto " + getColor(i)} style={{ "height": (e).toString() + "px" }} />
             );
           })
         }

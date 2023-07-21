@@ -8,7 +8,7 @@ const handleShuffle = async (bars: number[], setBars: any, pace: number) => {
     [array[i], array[j]] = [array[j], array[i]];
     console.log(array);
     setBars([...array]);
-    await sleep(pace);
+    await sleep(30);
   }
 };
 
