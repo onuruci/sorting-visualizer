@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';
-import { handleShuffle, bubbleSort, mergeSort } from './algorithms';
+import { handleShuffle, bubbleSort, mergeSort, quickSort } from './algorithms';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Typography } from '@mui/material';
@@ -51,6 +51,10 @@ function App() {
         setAlgoName("mergeSort");
         selectedAlgo = mergeSort;
         break;
+      case "quickSort":
+        setAlgoName("quickSort");
+        selectedAlgo = quickSort;
+        break;
       default:
         setAlgoName("bubbleSort");
         selectedAlgo = bubbleSort;
@@ -95,6 +99,7 @@ function App() {
             >
               <MenuItem value={"bubbleSort"}>BubbleSort</MenuItem>
               <MenuItem value={"mergeSort"}>MergeSort</MenuItem>
+              <MenuItem value={"quickSort"}>QuickSort</MenuItem>
             </Select>
           </FormControl>
         </Box>
