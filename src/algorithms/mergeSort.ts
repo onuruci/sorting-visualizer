@@ -1,9 +1,7 @@
 import sleep from "./sleep";
+import { green, purple } from "../utils/colors"
 
 let arrBars: number[] = [];
-
-const green = "bg-green-700";
-const purple = "bg-purple-700";
 
 const addToSelected = (index: number, color: string, setSelected: any, selectedArr: SelectedItem[]) => {
   let item: SelectedItem = {
@@ -52,7 +50,7 @@ const mergeVisualizer = async (bars: number[], setBars: any, setSelected: any, p
 
           setBars([...tempArr]);
 
-          await sleep(100);
+          await sleep(pace);
         }
 
         break;
@@ -70,7 +68,7 @@ const mergeVisualizer = async (bars: number[], setBars: any, setSelected: any, p
 
           setBars([...tempArr]);
 
-          await sleep(150);
+          await sleep(pace);
         }
 
 
@@ -95,7 +93,7 @@ const mergeVisualizer = async (bars: number[], setBars: any, setSelected: any, p
 
       setBars([...tempArr]);
 
-      await sleep(150);
+      await sleep(pace);
     }
 
     setSelected([]);
@@ -103,7 +101,7 @@ const mergeVisualizer = async (bars: number[], setBars: any, setSelected: any, p
     arrBars = arrBars.slice(0, iStart).concat(newArr, arrBars.slice(iEnd));
 
     setBars([...arrBars]);
-    sleep(100);
+    sleep(pace);
 
     return arrBars;
   } else if (partLen === 2) {
@@ -128,11 +126,11 @@ const mergeVisualizer = async (bars: number[], setBars: any, setSelected: any, p
 
     setSelected([item1, item2]);
 
-    await sleep(500);
+    await sleep(pace);
 
     setBars([...arrBars]);
 
-    await sleep(250);
+    await sleep(pace);
 
     return arrBars;
 
@@ -146,7 +144,7 @@ const mergeVisualizer = async (bars: number[], setBars: any, setSelected: any, p
 
 const mergeSort = async (bars: number[], setBars: any, setSelected: any, pace: number) => {
   arrBars = bars;
-  let arr = await mergeVisualizer(bars, setBars, setSelected, pace, 0, bars.length);
+  let arr = await mergeVisualizer(bars, setBars, setSelected, pace * 2, 0, bars.length);
   console.log(arr);
   setBars([...arr]);
 };

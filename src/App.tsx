@@ -85,7 +85,7 @@ function App() {
       <div className='max-w-fit p-3 mx-auto text-left flex space-x-8 items-center'>
         <Box sx={{ minWidth: 180 }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Algorithm</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
