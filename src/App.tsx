@@ -16,6 +16,8 @@ function App() {
   const [bars, setBars] = useState([1]);
   const [selectedNum, setSelected] = useState<SelectedItem[]>([]);
   const [pace, setPace] = useState(50);
+  const [algorithm, setAlgorithm] = useState<AlgorithmType>(() => bubbleSort);
+  const [algoName, setAlgoName] = useState("bubbleSort");
 
   const handlePaceChange = (e: any) => {
     setPace(100 - e.target.value);
@@ -35,6 +37,28 @@ function App() {
 
     return "bg-red-700";
   };
+
+  const handleAlgorithmChange = (e: any) => {
+    let val = e.target.value;
+    let selectedAlgo: AlgorithmType;
+
+    switch (val) {
+      case "bubbleSort":
+        setAlgoName("bubbleSort");
+        selectedAlgo = bubbleSort;
+        break;
+      case "mergeSort":
+        setAlgoName("mergeSort");
+        selectedAlgo = mergeSort;
+        break;
+      default:
+        setAlgoName("bubbleSort");
+        selectedAlgo = bubbleSort;
+        break;
+    }
+
+    setAlgorithm(() => selectedAlgo);
+  }
 
   useEffect(() => {
     let arr = [];
@@ -65,9 +89,9 @@ function App() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={""}
+              value={algoName}
               label="Algorithm"
-              onChange={() => { }}
+              onChange={(e) => handleAlgorithmChange(e)}
             >
               <MenuItem value={"bubbleSort"}>BubbleSort</MenuItem>
               <MenuItem value={"mergeSort"}>MergeSort</MenuItem>
@@ -87,13 +111,13 @@ function App() {
           <Slider defaultValue={50} valueLabelDisplay="auto" min={10} max={90} onChange={(e) => handlePaceChange(e)} />
         </Box>
         <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => handleShuffle(bars, setBars, pace)} >Shuffle</Button>
-        <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => mergeSort(bars, setBars, setSelected, pace)}>Sort</Button>
+        <Button variant="contained" className='bg-cyan-300 max-h-12' onClick={() => algorithm(bars, setBars, setSelected, pace)}>Sort</Button>
       </div>
       <div className='flex items-center mx-auto max-w-fit mt-20 min-h-[500px]'>
         {
           bars.map((e: number, i) => {
             return (
-              <div key={e} className={"w-5 p-2 mx-1 mt-auto " + getColor(i)} style={{ "height": (e).toString() + "px" }} />
+              <div key={e * Math.random()} className={"w-5 p-2 mx-1 mt-auto " + getColor(i)} style={{ "height": (e).toString() + "px" }} />
             );
           })
         }
