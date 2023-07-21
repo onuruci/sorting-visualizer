@@ -1,9 +1,7 @@
 import sleep from "./sleep";
+import { green, purple } from "../utils/colors"
 
 let arrBars: number[] = [];
-
-const green = "bg-green-700";
-const purple = "bg-purple-700";
 
 const addToSelected = (index: number, color: string, setSelected: any, selectedArr: SelectedItem[]) => {
   let item: SelectedItem = {

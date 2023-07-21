@@ -1,6 +1,14 @@
 import sleep from "./sleep";
+import { green } from "../utils/colors";
 
-// set types
+const setSelectedItem = (index: number, setSelected: any) => {
+  let item: SelectedItem = {
+    index: index,
+    color: green,
+  }
+
+  setSelected([item]);
+}
 
 const bubbleSort = async (bars: number[], setBars: any, setSelected: any, pace: number) => {
   let array = bars;
@@ -14,13 +22,13 @@ const bubbleSort = async (bars: number[], setBars: any, setSelected: any, pace: 
     for (let i = 1; i < lenToLoop; i++) {
       if (array[i] >= maxNum) {
         maxNum = array[i];
-        setSelected(i);
+        setSelectedItem(i, setSelected);
       } else {
         let temp = array[i];
         array[i] = array[i - 1];
         array[i - 1] = temp;
         sorted = false;
-        setSelected(i);
+        setSelectedItem(i, setSelected);
       }
       setBars([...array]);
       await sleep(pace);
