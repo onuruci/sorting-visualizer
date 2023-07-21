@@ -6,6 +6,10 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function App() {
   const [barCount, setBarCount] = useState(20);
@@ -54,12 +58,28 @@ function App() {
           </h2>
         </div>
       </div>
-      <div className='max-w-fit p-3 mx-auto text-left flex space-x-8 items-center'><Box width={300}>
-        <Typography gutterBottom>
-          Dataset Size
-        </Typography>
-        <Slider defaultValue={20} valueLabelDisplay="auto" min={10} max={40} marks step={10} onChange={(e) => handleDataSetSizeChange(e)} />
-      </Box>
+      <div className='max-w-fit p-3 mx-auto text-left flex space-x-8 items-center'>
+        <Box sx={{ minWidth: 180 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={""}
+              label="Algorithm"
+              onChange={() => { }}
+            >
+              <MenuItem value={"bubbleSort"}>BubbleSort</MenuItem>
+              <MenuItem value={"mergeSort"}>MergeSort</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box width={300}>
+          <Typography gutterBottom>
+            Dataset Size
+          </Typography>
+          <Slider defaultValue={20} valueLabelDisplay="auto" min={10} max={40} marks step={10} onChange={(e) => handleDataSetSizeChange(e)} />
+        </Box>
         <Box width={300}>
           <Typography gutterBottom>
             Pace
