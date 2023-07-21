@@ -23,25 +23,25 @@ const swapView = (index1: number, index2: number, pivot: number, setSelected: an
 
 }
 
-const implementQuick = async (bars: number[], iStart: number, iEnd: number, setBars: any, setSelected: any) => {
+const implementQuick = async (bars: number[], iStart: number, iEnd: number, setBars: any, setSelected: any, pace: number) => {
   if (iStart >= iEnd || iStart < 0) {
     return;
   }
 
-  let p = await partition(array, iStart, iEnd, setBars, setSelected);
+  let p = await partition(array, iStart, iEnd, setBars, setSelected, pace);
 
-  await implementQuick(array, iStart, p - 1, setBars, setSelected);
+  await implementQuick(array, iStart, p - 1, setBars, setSelected, pace);
 
   setBars([...array]);
 
-  await implementQuick(array, p, iEnd, setBars, setSelected);
+  await implementQuick(array, p, iEnd, setBars, setSelected, pace);
 
   setBars([...array]);
 
   return;
 };
 
-const partition = async (array: number[], iStart: number, iEnd: number, setBars: any, setSelected: any) => {
+const partition = async (array: number[], iStart: number, iEnd: number, setBars: any, setSelected: any, pace: number) => {
   let pivot = array[iEnd];
   let pivotIndex = iStart - 1;
 
@@ -53,10 +53,10 @@ const partition = async (array: number[], iStart: number, iEnd: number, setBars:
       array[i] = temp;
 
       swapView(i, pivotIndex, iEnd, setSelected);
-      await sleep(100);
+      await sleep(pace);
 
       setBars([...array]);
-      await sleep(100);
+      await sleep(pace);
     }
   }
 
@@ -65,10 +65,10 @@ const partition = async (array: number[], iStart: number, iEnd: number, setBars:
   array[pivotIndex] = array[iEnd];
   array[iEnd] = temp;
   swapView(iEnd, pivotIndex, iEnd, setSelected);
-  await sleep(100);
+  await sleep(pace);
 
   setBars([...array]);
-  await sleep(100);
+  await sleep(pace);
 
   return pivotIndex;
 }
@@ -76,7 +76,7 @@ const partition = async (array: number[], iStart: number, iEnd: number, setBars:
 const quickSort = async (bars: number[], setBars: any, setSelected: any, pace: number) => {
   array = [...bars];
 
-  await implementQuick(array, 0, array.length - 1, setBars, setSelected);
+  await implementQuick(array, 0, array.length - 1, setBars, setSelected, pace);
 
   setSelected([]);
   setBars([...array]);
